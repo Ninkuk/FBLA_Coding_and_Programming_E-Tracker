@@ -26,9 +26,9 @@ public class StudentController implements Initializable {
     public Button accountButton;
     public Button helpButton;
 
-    public int viewState = 1;
+    private int viewState = 1;
 
-    public void switchToHome() throws Exception {
+    public void switchToHome() throws Exception { //this method switches the scene to Home Page for students
         homeButton.setStyle("-fx-background-color: #37474F");
         libraryButton.setStyle("-fx-background-color: #455A64");
         accountButton.setStyle("-fx-background-color: #455A64");
@@ -37,7 +37,7 @@ public class StudentController implements Initializable {
         viewState = 1;
     }
 
-    public void switchToLibrary() throws Exception {
+    public void switchToLibrary() throws Exception { //this method switches the scene to Library Page for students
         homeButton.setStyle("-fx-background-color: #455A64");
         libraryButton.setStyle("-fx-background-color: #37474F");
         accountButton.setStyle("-fx-background-color: #455A64");
@@ -46,7 +46,7 @@ public class StudentController implements Initializable {
         viewState = 2;
     }
 
-    public void switchToAccount() throws Exception {
+    public void switchToAccount() throws Exception { //this method switches the scene to Account Page for students
         homeButton.setStyle("-fx-background-color: #455A64");
         libraryButton.setStyle("-fx-background-color: #455A64");
         accountButton.setStyle("-fx-background-color: #37474F");
@@ -98,5 +98,5 @@ public class StudentController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         homeButton.fire();
-    }
+    } //home page is displayed by default through this method
 }
