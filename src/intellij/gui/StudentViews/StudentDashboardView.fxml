@@ -18,7 +18,7 @@
         <VBox alignment="TOP_CENTER" prefWidth="150.0" style="-fx-background-color: #455A64;"
               BorderPane.alignment="CENTER">
             <children>
-                <VBox fx:id="accountInfo" prefHeight="200.0" prefWidth="150.0" style="-fx-background-color: #263238;">
+                <VBox prefHeight="200.0" prefWidth="150.0" style="-fx-background-color: #263238;">
                     <children>
                         <HBox alignment="CENTER" prefHeight="92.0">
                             <VBox.margin>
