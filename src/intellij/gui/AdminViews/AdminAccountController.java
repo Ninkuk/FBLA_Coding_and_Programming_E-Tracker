@@ -1,7 +1,6 @@
 package intellij.gui.AdminViews;
 
 import intellij.Admin;
-import intellij.Teacher;
 import intellij.User;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -31,20 +30,19 @@ public class AdminAccountController implements Initializable {
         nameLabel.setText(firstName + " " + lastName);
     }
 
-    public void showChangePasswordBox(){
+    public void showChangePasswordBox() {
         changePasswordBox.setVisible(true);
     }
 
-    public void changePasswordValidate(){
+    public void changePasswordValidate() {
         String password1Text = password1.getText();
         String password2Text = password2.getText();
 
-        if ((password1Text.equals(password2Text))){
+        if ((password1Text.equals(password2Text))) {
             String message = Admin.changePassword(password1Text);
             errorMessage.setVisible(true);
             errorMessage.setText(message);
-        }
-        else {
+        } else {
             errorMessage.setVisible(true);
             errorMessage.setText("Passwords Do Not Match");
         }
