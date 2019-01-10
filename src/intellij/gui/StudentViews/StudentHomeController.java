@@ -118,7 +118,7 @@ public class StudentHomeController implements Initializable {
     }
 
     public void returnBookBack() {
-        ObservableList<Book> bookSelected = null;
+        ObservableList<Book> bookSelected;
         bookSelected = tableView.getSelectionModel().getSelectedItems();
 
         int code = bookSelected.get(0).getRedemptionCode();
