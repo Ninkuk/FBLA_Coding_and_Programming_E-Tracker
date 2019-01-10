@@ -6,7 +6,6 @@
       <root url="jar://$PROJECT_DIR$/hsqldb-2.4.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/jackcess-2.2.2.jar!/" />
       <root url="jar://$PROJECT_DIR$/jfoenix-9.0.8.jar!/" />
-      <root url="jar://$PROJECT_DIR$/mysql-connector-java-8.0.13.jar!/" />
       <root url="jar://$PROJECT_DIR$/ucanaccess-4.0.4.jar!/" />
     </CLASSES>
     <JAVADOC />
