@@ -23,30 +23,34 @@ public class LoginScreenController {
         String username = usernameInput.getText();
         String password = passwordInput.getText();
 
-        if((User.logIn(username, password))){
-            if(User.getAccessLevel().equals("admin")) {
-                Parent root = FXMLLoader.load(getClass().getResource("AdminViews/AdminDashboardView.fxml"));
-                Scene scene = new Scene(root, 1000, 650);
-                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                window.setScene(scene);
-                window.show();
+        if ((User.logIn(username, password))) {
+            switch (User.getAccessLevel()) {
+                case "admin": {
+                    Parent root = FXMLLoader.load(getClass().getResource("AdminViews/AdminDashboardView.fxml"));
+                    Scene scene = new Scene(root, 1000, 650);
+                    Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    window.setScene(scene);
+                    window.show();
+                    break;
+                }
+                case "teacher": {
+                    Parent root = FXMLLoader.load(getClass().getResource("TeacherViews/TeacherDashboardView.fxml"));
+                    Scene scene = new Scene(root, 1000, 650);
+                    Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    window.setScene(scene);
+                    window.show();
+                    break;
+                }
+                case "student": {
+                    Parent root = FXMLLoader.load(getClass().getResource("StudentViews/StudentDashboardView.fxml"));
+                    Scene scene = new Scene(root, 1000, 650);
+                    Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    window.setScene(scene);
+                    window.show();
+                    break;
+                }
             }
-            else if(User.getAccessLevel().equals("teacher")) {
-                Parent root = FXMLLoader.load(getClass().getResource("TeacherViews/TeacherDashboardView.fxml"));
-                Scene scene = new Scene(root, 1000, 650);
-                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                window.setScene(scene);
-                window.show();
-            }
-            else if(User.getAccessLevel().equals("student")) {
-                Parent root = FXMLLoader.load(getClass().getResource("StudentViews/StudentDashboardView.fxml"));
-                Scene scene = new Scene(root, 1000, 650);
-                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                window.setScene(scene);
-                window.show();
-            }
-        }
-        else {
+        } else {
             inputError.setVisible(true);
         }
     }
