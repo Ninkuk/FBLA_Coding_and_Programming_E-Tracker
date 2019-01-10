@@ -1,8 +1,6 @@
 package intellij.gui.TeacherViews;
 
 import intellij.Book;
-import intellij.Student;
-import intellij.User;
 import intellij.database.DBConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,13 +21,20 @@ import java.util.ResourceBundle;
 
 public class TeacherReportController implements Initializable {
 
-    @FXML TableView<Book> tableView;
-    @FXML TableColumn<Book, String> title;
-    @FXML TableColumn<Book, String> heldBy;
-    @FXML TableColumn<Book, LocalDate> dateOut;
-    @FXML TableColumn<Book, LocalDate> dateIn;
-    @FXML TableColumn<Book, LocalDate> dueBy;
-    @FXML TableColumn<Book, Integer> redemption;
+    @FXML
+    TableView<Book> tableView;
+    @FXML
+    TableColumn<Book, String> title;
+    @FXML
+    TableColumn<Book, String> heldBy;
+    @FXML
+    TableColumn<Book, LocalDate> dateOut;
+    @FXML
+    TableColumn<Book, LocalDate> dateIn;
+    @FXML
+    TableColumn<Book, LocalDate> dueBy;
+    @FXML
+    TableColumn<Book, Integer> redemption;
 
     public Button generateButton;
     public Label messageLabel;
@@ -41,12 +46,12 @@ public class TeacherReportController implements Initializable {
 
     }
 
-    public void generateReport(){
+    public void generateReport() {
         try {
             Statement statement = DBConnection.getConnection().createStatement();
             ResultSet results = statement.executeQuery("SELECT Id, Title, Held_by, Date_out, Date_in, Due_by, Redemption_code FROM weekly_reports");
 
-            while(results.next()) {
+            while (results.next()) {
                 report.add(new Book(results.getString("Title"), results.getString("Held_by"), results.getObject("Date_out", LocalDate.class), results.getObject("Date_in", LocalDate.class), results.getObject("Due_by", LocalDate.class), results.getInt("Redemption_code")));
             }
 
