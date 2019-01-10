@@ -96,7 +96,7 @@ public class AdminController implements Initializable{
                 break;
             case 4:
                 FXMLLoader fxmlLoader4 = new FXMLLoader(getClass().getResource("../HelpViews/HelpAdminAccountView.fxml"));
-                Parent root4 = (Parent) fxmlLoader4.load();
+                Parent root4 = fxmlLoader4.load();
                 Stage primaryStage4 = new Stage();
                 primaryStage4.setTitle("Account Help");
                 primaryStage4.setScene(new Scene(root4));

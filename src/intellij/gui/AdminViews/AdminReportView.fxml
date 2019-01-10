@@ -10,17 +10,20 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="adminDashCenter" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="220.0" minWidth="800.0" prefHeight="650.0" prefWidth="1000.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="TOP_LEFT" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="intellij.gui.AdminViews.AdminReportController">
+<BorderPane fx:id="adminDashCenter" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="220.0" minWidth="800.0"
+            prefHeight="650.0" prefWidth="1000.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="TOP_LEFT"
+            xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="intellij.gui.AdminViews.AdminReportController">
     <top>
         <Label fx:id="label" text="Reports" textFill="#212121" BorderPane.alignment="TOP_LEFT">
             <BorderPane.margin>
-                <Insets left="40.0" top="25.0" />
+                <Insets left="40.0" top="25.0"/>
             </BorderPane.margin>
             <font>
-                <Font name="Montserrat SemiBold" size="20.0" />
+                <Font name="Montserrat SemiBold" size="20.0"/>
             </font>
             <HBox.margin>
-                <Insets left="40.0" top="25.0" />
+                <Insets left="40.0" top="25.0"/>
             </HBox.margin>
         </Label>
     </top>
@@ -28,30 +31,32 @@
         <VBox BorderPane.alignment="TOP_LEFT">
             <TableView fx:id="tableView" prefHeight="500.0">
                 <columns>
-                    <TableColumn fx:id="title" prefWidth="100.0" text="Title" />
-                    <TableColumn fx:id="heldBy" prefWidth="100.0" text="Held By" />
-                    <TableColumn fx:id="dateOut" prefWidth="100.0" text="Date Out" />
-                    <TableColumn fx:id="dateIn" prefWidth="100.0" text="Date In" />
-                    <TableColumn fx:id="dueBy" prefWidth="100.0" text="Due By" />
-                    <TableColumn fx:id="redemption" prefWidth="100.0" text="Redemption Code" />
+                    <TableColumn fx:id="title" prefWidth="100.0" text="Title"/>
+                    <TableColumn fx:id="heldBy" prefWidth="100.0" text="Held By"/>
+                    <TableColumn fx:id="dateOut" prefWidth="100.0" text="Date Out"/>
+                    <TableColumn fx:id="dateIn" prefWidth="100.0" text="Date In"/>
+                    <TableColumn fx:id="dueBy" prefWidth="100.0" text="Due By"/>
+                    <TableColumn fx:id="redemption" prefWidth="100.0" text="Redemption Code"/>
                 </columns>
                 <columnResizePolicy>
-                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
                 </columnResizePolicy>
                 <BorderPane.margin>
-                    <Insets top="20.0" />
+                    <Insets top="20.0"/>
                 </BorderPane.margin>
                 <VBox.margin>
-                    <Insets top="20.0" />
+                    <Insets top="20.0"/>
                 </VBox.margin>
             </TableView>
             <HBox alignment="CENTER">
-                <JFXButton fx:id="generateButton" buttonType="RAISED" contentDisplay="CENTER" focusTraversable="false" layoutX="460.0" layoutY="40.0" style="-fx-background-color: #00bfa5;" text="Generate Report" textFill="WHITE">
+                <JFXButton fx:id="generateButton" buttonType="RAISED" contentDisplay="CENTER" focusTraversable="false"
+                           layoutX="460.0" layoutY="40.0" style="-fx-background-color: #00bfa5;" text="Generate Report"
+                           textFill="WHITE" onAction="#generateReport">
                     <font>
-                        <Font name="Montserrat Medium" size="15.0" />
+                        <Font name="Montserrat Medium" size="15.0"/>
                     </font>
                     <HBox.margin>
-                        <Insets top="30.0" />
+                        <Insets top="30.0"/>
                     </HBox.margin>
                 </JFXButton>
             </HBox>
@@ -59,16 +64,16 @@
                 <children>
                     <Label fx:id="messageLabel" alignment="CENTER" text="error" textFill="#f44336" visible="false">
                         <font>
-                            <Font name="Montserrat Regular" size="10.0" />
+                            <Font name="Montserrat Regular" size="10.0"/>
                         </font>
                     </Label>
                 </children>
                 <VBox.margin>
-                    <Insets top="20.0" />
+                    <Insets top="20.0"/>
                 </VBox.margin>
             </HBox>
             <BorderPane.margin>
-                <Insets />
+                <Insets/>
             </BorderPane.margin>
         </VBox>
     </center>

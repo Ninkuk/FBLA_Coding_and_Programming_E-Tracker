@@ -15,50 +15,20 @@ public class Admin{
 
     /**
      * a function that Admins can use in their profile page to change their password
-     * the function queries the salt of the username and uses it to hash the new password
-     * The salt is used to prevent rainbow tabling and the hash is to avoid saving the passwords in plain text
      * The function is static so it cam be called on the GUI side without creating a admin object
-     * if a admin object is created, then I would have to query the data necessary to pass to the parameters, which is unnecessary since I only need this function
+     * if an admin object is created, then I would have to query the data necessary to pass to the parameters, which is unnecessary since I only need this function
      * @param password - The new password set for the user
      * @return String that will be printed to front-end to notify the user the result of their action
      */
     public static String changePassword(String password){
         try {
             Statement statement = DBConnection.getConnection().createStatement();
-
-            //checks that the password is at least 6 characters to make sure that the passwords are not easily susceptible to hacking
-            if(password.length() <= 5 ) {
-                return "Password must be longer than 5 characters";
-            }
-
-            //queries the unique salt of the username to use in hashing the password
-            String query = "SELECT Salt FROM admins WHERE (Username LIKE '" + User.getUsername() + "')";
-            ResultSet results = statement.executeQuery(query);
-            String salt = "";
-            while(results.next()){
-                salt = results.getString("Salt");
-            }
-
-            //hashes the password entered by concatenating the password with the unique salt. This is done to prevent rainbow tabling and to avoid writing the password in plain text
-            query = "SELECT SHA2(CONCAT('" + salt + "', '" + password + "'), 512) AS Password";
-            results = statement.executeQuery(query);
-            String saltedHashedPassword = "";
-            while(results.next()){
-                saltedHashedPassword = results.getString("Password");
-            }
-
+            Statement backupStatement = DBConnection.getBackupConnection().createStatement(); //connects to backup database
 
             //updates the old password with the new password
-            query = "UPDATE admins SET Password = '" + saltedHashedPassword + "' WHERE (Username LIKE '" + User.getUsername() + "')";
-            int rowsUpdated = statement.executeUpdate(query);
-            if(rowsUpdated == 0) {
-                return "Error, unable to change password. Check the Help page or contact us for more information"; //will only return this if the password has not been changed
-            }
-
-            //updates the old password with the new password in the back up database to dynamically back up data
-            Statement backupStatement = DBConnection.getBackupConnection().createStatement(); //connects to backup database
-            backupStatement.executeUpdate(query);
-
+            String query = "UPDATE admins SET Password = '" + password + "' WHERE (Username LIKE '" + User.getUsername() + "')";
+            statement.executeUpdate(query);
+            backupStatement.executeUpdate(query);//updates the old password with the new password in the back up database to dynamically back up data
         }catch(SQLException e) {
             e.printStackTrace();
             System.err.println("Error: can't connect to database or incorrect SQL Statement");
@@ -69,9 +39,6 @@ public class Admin{
     /**
      * The addStudents function adds a student to the students table and to the students backup table.
      * it generated a username from the first and last name of the student
-     * a salt is generated to be stored in the row of the student being created
-     * the salt is used to create a salted hashed password for security
-     * the salt is to prevent rainbow tabling, and the hashing is to avoid storing passwords in plain text
      *
      * @param firstName - the first name of the student being created
      * @param lastName - the last name of the student being created
@@ -103,23 +70,7 @@ public class Admin{
                 username += usernameCount;//if a username already exists like the one generated from first and last name, then a number is added to the end of the number to make it distinct
             }
 
-            //generates a random salt to use when hashing the password, in order to prevent rainbow tabling
-            query = "SELECT MD5(RAND()) AS Salt";
-            results = statement.executeQuery(query);
-            String salt = "";
-            while(results.next()) {
-                salt = results.getString("Salt");
-            }
-
-            //hashes the password entered by concatenating the password with the unique salt. This is done to prevent rainbow tabling and to avoid writing the password in plain text
-            query = "SELECT SHA2(CONCAT('" + salt + "', '" + password + "'), 512) AS Password";
-            results = statement.executeQuery(query);
-            String saltedHashedPassword = "";
-            while(results.next()) {
-                saltedHashedPassword = results.getString("Password");
-            }
-
-            query = "INSERT INTO students (Username, Salt, Password, First_name, Last_name, Grade) VALUES ('" + username + "', '" + salt + "', '" + saltedHashedPassword + "', '" + firstName + "', '" + lastName + "', '" + grade + "')";
+            query = "INSERT INTO students (Username, Password, First_name, Last_name, Grade) VALUES ('" + username + "', '" + password + "', '" + firstName + "', '" + lastName + "', '" + grade + "')";
             statement.executeUpdate(query);//creates a new row in the student table with the first and last name inputted, the username generated from that, the salt generated, and the salted hashed password from the password inputted
             backupStatement.executeUpdate(query);//creates a new row in the back up student table with the first and last name inputted, the username generated from that, the salt generated, and the salted hashed password from the password inputted
         }catch(SQLException e) {
@@ -150,7 +101,6 @@ public class Admin{
     /**
      * Updates the information of a student
      * Updates in both the students table and the back up students table
-     * uses salt and hashing when changing the password
      *
      * @param username - used to identify what teacher is being updated. Is NOT for setting a new username. the username is based off of first and last names
      * @param firstName - new value for first name.
@@ -174,26 +124,12 @@ public class Admin{
 
             //if the username exists, then the function will update the student, otherwise a false will be returned
             if(usernameCount == 1) {
-                //queries the unique salt of the username to use in hashing the password
-                query = "SELECT Salt FROM students WHERE (Username LIKE '" + username + "')";
-                results = statement.executeQuery(query);
-                String salt = "";
-                while(results.next()) {
-                    salt = results.getString("Salt");
-                }
 
-                //hashes the password entered by concatenating the password with the unique salt. This is done to prevent rainbow tabling and to avoid writing the password in plain text
-                query = "SELECT SHA2(CONCAT('" + salt + "', '" + password + "'), 512) AS Password";
-                results = statement.executeQuery(query);
-                String saltedHashedPassword = "";
-                while(results.next()) {
-                    saltedHashedPassword = results.getString("Password");
-                }
-            /*
-             Creates a new username from first and last name of student
-             Username follows the convention of first letter of first name + the last name
-             if that username exists, then number 1 is added to the username and is incremented for each student that has the same first and last name currently in the table
-             */
+                /*
+                 Creates a new username from first and last name of student
+                 Username follows the convention of first letter of first name + the last name
+                 if that username exists, then number 1 is added to the username and is incremented for each student that has the same first and last name currently in the table
+                 */
                 String newUsername = firstName.charAt(0) + lastName; //creating a new username based off of the first and last name of the student
                 query = "SELECT COUNT(Username) AS Username FROM students WHERE Username LIKE '" + newUsername + "'";
                 results = statement.executeQuery(query);//checks how many usernames like this exist
@@ -204,13 +140,13 @@ public class Admin{
 
                 if(usernameCount > 0) {
                     newUsername += usernameCount;//if a username already exists like the one generated from first and last name, then a number is added to the end of the number to make it distinct
-                    query = "UPDATE students SET Username = '" + newUsername + "', First_name = '" + firstName + "', Last_name = '" + lastName + "', Password = '" + saltedHashedPassword + "', Grade = '" + grade + "' WHERE Username LIKE '" + username + "'";
+                    query = "UPDATE students SET Username = '" + newUsername + "', First_name = '" + firstName + "', Last_name = '" + lastName + "', Password = '" + password + "', Grade = '" + grade + "' WHERE Username LIKE '" + username + "'";
                     statement.executeUpdate(query);//updates table with newUsername, new first name, and new last name
                     backupStatement.executeUpdate(query);//updates to backup table with newUsername, new first name, new last name, new password, and new grade
                     return true;
                 }else {
                     //if no username is similar to what is created, then the new username is updated in the students table without adding any numbers
-                    query = "UPDATE students SET Username = '" + newUsername + "', First_name = '" + firstName + "', Last_name = '" + lastName + "', Password = '" + saltedHashedPassword + "', Grade = '" + grade + "' WHERE Username LIKE '" + username + "'";
+                    query = "UPDATE students SET Username = '" + newUsername + "', First_name = '" + firstName + "', Last_name = '" + lastName + "', Password = '" + password + "', Grade = '" + grade + "' WHERE Username LIKE '" + username + "'";
                     statement.executeUpdate(query);//updates to backup table with newUsername, new first name, new last name, new password, and new grade
                     backupStatement.executeUpdate(query);//updates to backup table with newUsername, new first name, new last name, new password, and new grade
                     return true;

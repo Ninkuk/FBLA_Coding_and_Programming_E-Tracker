@@ -13,7 +13,7 @@ public class Book {
     private String title;
     private String author;
     private int pages;
-    private long ISBN;
+    private String ISBN;
     private String heldBy;
     private LocalDate dateOut;
     private LocalDate dueBy;
@@ -31,7 +31,7 @@ public class Book {
      * @param pages          - int to assign how many pages the book has
      * @param ISBN           - Long to assign the book's ISBN
      */
-    public Book(int redemptionCode, String title, String author, int pages, long ISBN) {
+    public Book(int redemptionCode, String title, String author, int pages, String ISBN) {
         this.setRedemptionCode(redemptionCode);
         this.setTitle(title);
         this.setAuthor(author);
@@ -291,14 +291,14 @@ public class Book {
     /**
      * @return the ISBN of the book
      */
-    public long getISBN() {
+    public String getISBN() {
         return ISBN;
     }
 
     /**
      * @param ISBN - Long to assign the book's ISBN
      */
-    public void setISBN(long ISBN) {
+    public void setISBN(String ISBN) {
         this.ISBN = ISBN;
     }
 

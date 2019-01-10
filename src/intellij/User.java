@@ -18,7 +18,7 @@ public class User {
     private static String firstName;
     private static String lastName;
     private static byte grade; //byte, in order to match the data type in database
-    private static String accessLevel;
+    private static String accessLevel; //to determine which GUI to use. If the logged in user is an admin, then this field is set to admin, which tells the GUI that the user should be taken to the admin GUI.
 
 
     /**
@@ -28,9 +28,8 @@ public class User {
      * The logIn function checks three tables for the combination of the username and password. The admins, teachers, and students tables
      * it checks the students table last, because it's the biggest able, so if he user is an admin or a teacher, then it will save work for the user
      *
-     * After the user logs in, the logIn function instantiates a student, teacher, or admin object depending on who logged in order to know to which gui to go.
-     * for example, if an admin logs in, then they will go the gui meant for an admin, but if a student logs in, then a student object is instantiated so that user is taken tothe student gui
-     * On the GUI side of this application, I check which object has a value, and that's how I know which one was instantiated
+     * After the user logs in, the logIn function assigns the data of the user to the fields in this class.
+     * most importantly, it gives a value to the accessLevel, which tells the GUI which page to go.
      *
      * @param username - the username that the user inputs
      * @param password - the password that the user inputs
@@ -40,159 +39,71 @@ public class User {
         try{
             Statement statement = DBConnection.getConnection().createStatement();
 
-            /*
-             * checks if the username exists in the admins table
-             * if the username doesn't exist, then it will skip the process of hashing and salting the inputted password to be checked with the password in the table
-             * that way it saves the user some loading time
-             */
-            String query = "SELECT COUNT(Username) AS Username FROM admins WHERE Username LIKE '" + username + "'";
+            //compares the inputted username and password with the password in the admins table
+            String query = "SELECT COUNT(Password) AS Password FROM admins WHERE (Username LIKE '" + username +  "') AND (Password LIKE '" + password + "')";
             ResultSet results = statement.executeQuery(query);
-            int usernameCount = 0;
+            int combinationCount = 0;
             while(results.next()){
-                usernameCount = results.getInt("Username");
-            }
-            if(usernameCount == 1) {
-                //checks if there is a matching password, but the password inputted has to be salted and hashed in the same way as the password in the table
-                //queries the unique salt of the username
-                query = "SELECT Salt FROM admins WHERE Username LIKE '" + username + "'";
-                results = statement.executeQuery(query);
-                String salt = "";
-                while(results.next()){
-                    salt = results.getString("Salt");
-                }
-
-                //from the queried salt, the following code creates a salted hash of the inputted password
-                query = "SELECT SHA2(CONCAT('" + salt + "', '" + password + "'), 512) AS Password";
-                results = statement.executeQuery(query);
-                String saltedHashedPassword = "";
-                while(results.next()){
-                    saltedHashedPassword = results.getString("Password");
-                }
-
-                //compares the inputted password with the password in the table
-                query = "SELECT COUNT(Password) AS Password FROM admins WHERE (Username LIKE '" + username +  "') AND (Password LIKE '" + saltedHashedPassword + "')";
-                results = statement.executeQuery(query);
-                int combinationCount = 0;
-                while(results.next()){
-                    combinationCount = results.getInt("Password");
-                }
-
-                //if they match, then the admin logs in, and an Admin account is initialized
-                if(combinationCount == 1) {
-                    query = "SELECT First_name, Last_name FROM admins WHERE Username LIKE '" + username + "'";
-                    results = statement.executeQuery(query);
-                    while(results.next()){
-                        setUsername(username);
-                        setFirstName(results.getString("First_name"));
-                        setLastName(results.getString("Last_name"));
-                        setAccessLevel("admin");
-                    }
-                    return true;
-                }
+                combinationCount = results.getInt("Password");
             }
 
-            /*
-             * checks if the username exists in the teachers table
-             * if the username doesn't exist, then it will skip the process of hashing and salting the inputted password to be checked with the password in the table
-             * that way it saves the user some loading time
-             *
-             */
-            query = "SELECT COUNT(Username) AS Username FROM teachers WHERE Username LIKE '" + username + "'";
+            //if they match, then the admin logs in, and the fields of this class are initialized based on the user's data. Notice, the grade field is not initialized because only the students has a grade field
+            if(combinationCount == 1) {
+                query = "SELECT First_name, Last_name FROM admins WHERE Username LIKE '" + username + "'";
+                results = statement.executeQuery(query);
+                while(results.next()){
+                    setUsername(username);
+                    setFirstName(results.getString("First_name"));
+                    setLastName(results.getString("Last_name"));
+                    setAccessLevel("admin");
+                }
+                return true;
+            }
+
+
+
+            //compares the inputted username and password with the password in the teachers table
+            query = "SELECT COUNT(Password) AS Password FROM teachers WHERE (Username LIKE '" + username +  "') AND (Password = '" + password + "')";
             results = statement.executeQuery(query);
-            usernameCount = 0;
+            combinationCount = 0;
             while(results.next()){
-                usernameCount = results.getInt("Username");
-            }
-            if(usernameCount == 1) {
-                //checks if there is a matching password, but the password inputted has to be salted and hashed in the same way as the password in the table
-                //queries the unique salt of the username
-                query = "SELECT Salt FROM teachers WHERE Username LIKE '" + username + "'";
-                results = statement.executeQuery(query);
-                String salt = "";
-                while(results.next()){
-                    salt = results.getString("Salt");
-                }
-
-                //from the queried salt, the following code creates a salted hash of the inputted password
-                query = "SELECT SHA2(CONCAT('" + salt + "', '" + password + "'), 512) AS Password";
-                results = statement.executeQuery(query);
-                String saltedHashedPassword = "";
-                while(results.next()){
-                    saltedHashedPassword = results.getString("Password");
-                }
-
-                //compares the inputted password with the password in the table
-                query = "SELECT COUNT(Password) AS Password FROM teachers WHERE (Username LIKE '" + username +  "') AND (Password = '" + saltedHashedPassword + "')";
-                results = statement.executeQuery(query);
-                int combinationCount = 0;
-                while(results.next()){
-                    combinationCount = results.getInt("Password");
-                }
-
-                //if they match, then the teacher logs in, and an Teacher account is initialized
-                if(combinationCount == 1) {
-                    query = "SELECT First_name, Last_name FROM teachers WHERE Username LIKE '" + username + "'";
-                    results = statement.executeQuery(query);
-                    while(results.next()){
-                        setUsername(username);
-                        setFirstName(results.getString("First_name"));
-                        setLastName(results.getString("Last_name"));
-                        setAccessLevel("teacher");
-                    }
-                    return true;
-                }
+                combinationCount = results.getInt("Password");
             }
 
-            /*
-             * checks if the username exists in the students table
-             * if the username doesn't exist, then it will skip the process of hashing and salting the inputted password to be checked with the password in the table
-             * that way it saves the user some loading time
-             * */
-            query = "SELECT COUNT(Username) AS Username FROM students WHERE Username LIKE '" + username + "'";
+            //if they match, then the admin logs in, and the fields of this class are initialized based on the user's data. Notice, the grade field is not initialized because only the students has a grade field
+            if(combinationCount == 1) {
+                query = "SELECT First_name, Last_name FROM teachers WHERE Username LIKE '" + username + "'";
+                results = statement.executeQuery(query);
+                while(results.next()){
+                    setUsername(username);
+                    setFirstName(results.getString("First_name"));
+                    setLastName(results.getString("Last_name"));
+                    setAccessLevel("teacher");
+                }
+                return true;
+            }
+
+
+            //compares the inputted password with the password in the table
+            query = "SELECT COUNT(Password) AS Password FROM students WHERE (Username LIKE '" + username +  "') AND (Password LIKE '" + password + "')";
             results = statement.executeQuery(query);
-            usernameCount = 0;
+            combinationCount = 0;
             while(results.next()){
-                usernameCount = results.getInt("Username");
+                combinationCount = results.getInt("Password");
             }
-            if(usernameCount == 1) {
-                //checks if there is a matching password, but the password inputted has to be salted and hashed in the same way as the password in the table
-                //queries the unique salt of the username
-                query = "SELECT Salt FROM students WHERE Username LIKE '" + username + "'";
-                results = statement.executeQuery(query);
-                String salt = "";
-                while(results.next()){
-                    salt = results.getString("Salt");
-                }
 
-                //from the queried salt, the following code creates a salted hash of the inputted password
-                query = "SELECT SHA2(CONCAT('" + salt + "', '" + password + "'), 512) AS Password";
+            //if they match, then the admin logs in, and the fields of this class are initialized based on the user's data. Notice, the grade field is initialized because user in this situation would be a student
+            if(combinationCount == 1) {
+                query = "SELECT First_name, Last_name, Grade FROM students WHERE Username LIKE '" + username + "'";
                 results = statement.executeQuery(query);
-                String saltedHashedPassword = "";
                 while(results.next()){
-                    saltedHashedPassword = results.getString("Password");
+                    setUsername(username);
+                    setFirstName(results.getString("First_name"));
+                    setLastName(results.getString("Last_name"));
+                    setGrade(results.getByte("Grade"));
+                    setAccessLevel("student");
                 }
-
-                //compares the inputted password with the password in the table
-                query = "SELECT COUNT(Password) AS Password FROM students WHERE (Username LIKE '" + username +  "') AND (Password LIKE '" + saltedHashedPassword + "')";
-                results = statement.executeQuery(query);
-                int combinationCount = 0;
-                while(results.next()){
-                    combinationCount = results.getInt("Password");
-                }
-
-                //if they match, then the student logs in, and an student account is initialized
-                if(combinationCount == 1) {
-                    query = "SELECT First_name, Last_name, Grade FROM students WHERE Username LIKE '" + username + "'";
-                    results = statement.executeQuery(query);
-                    while(results.next()){
-                        setUsername(username);
-                        setFirstName(results.getString("First_name"));
-                        setLastName(results.getString("Last_name"));
-                        setGrade(results.getByte("Grade"));
-                        setAccessLevel("student");
-                    }
-                    return true;
-                }
+                return true;
             }
 
         }catch(SQLException e) {

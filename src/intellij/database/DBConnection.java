@@ -17,10 +17,10 @@ public class DBConnection {
      */
     static {
         try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/library", "root", "FBLA2019");
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            connection = DriverManager.getConnection("jdbc:ucanaccess://E://Java//FBLA Coding and Programming/src/intellij//database//data.accdb");
             connected = true;
-            backupConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_backup", "root", "FBLA2019");
+            backupConnection = DriverManager.getConnection("jdbc:ucanaccess://E://Java//FBLA Coding and Programming/src/intellij//database//data_backup.accdb");
             backupConnected = true;
         }catch(ClassNotFoundException e){
             e.printStackTrace();

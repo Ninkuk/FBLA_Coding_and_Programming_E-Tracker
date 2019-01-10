@@ -50,7 +50,7 @@ public class AdminLibraryController implements Initializable {
     public TextField pagesnumUpdateInput;
     public TextField isbnUpdateInput;
     public Label messageLabel;
-    public HBox addInfoFields;
+    public VBox addInfoFields;
     public VBox updateInfoFields;
 
     ObservableList<Book> book = FXCollections.observableArrayList();
@@ -62,7 +62,7 @@ public class AdminLibraryController implements Initializable {
             ResultSet results = statement.executeQuery("SELECT * FROM books"); //get available book
 
             while (results.next()) {
-                book.add(new Book(results.getInt("Redemption_code"), results.getString("Title"), results.getString("Author"), results.getInt("Pages"), results.getLong("ISBN")));
+                book.add(new Book(results.getInt("Redemption_code"), results.getString("Title"), results.getString("Author"), results.getInt("Pages"), results.getString("ISBN")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -83,9 +83,10 @@ public class AdminLibraryController implements Initializable {
         bookSelected = tableView.getItems();
 
         if (bookSelected.isEmpty()) {
-            //checkoutButton.setDisable(true);
             messageLabel.setVisible(true);
-            messageLabel.setText("No Books to Available to Check Out");
+            removeButton.setDisable(true);
+            updateButton.setDisable(true);
+            messageLabel.setText("No Books in the Library");
         }
     }
 
@@ -118,7 +119,7 @@ public class AdminLibraryController implements Initializable {
                     ResultSet results = statement.executeQuery("SELECT * FROM books"); //get available book
 
                     while (results.next()) {
-                        book.add(new Book(results.getInt("Redemption_code"), results.getString("Title"), results.getString("Author"), results.getInt("Pages"), results.getLong("ISBN")));
+                        book.add(new Book(results.getInt("Redemption_code"), results.getString("Title"), results.getString("Author"), results.getInt("Pages"), results.getString("ISBN")));
                     }
                 } catch (SQLException e) {
                     e.printStackTrace();
@@ -133,19 +134,20 @@ public class AdminLibraryController implements Initializable {
                 tableView.setItems(book);
 
                 tableView.getSelectionModel().selectFirst();
-            }
-            else {
+            } else {
                 messageLabel.setVisible(true);
                 messageLabel.setText("Redemption Code is not unique");
             }
         }
+
         ObservableList<Book> bookSelected;
         bookSelected = tableView.getItems();
 
         if (bookSelected.isEmpty()) {
-            //checkoutButton.setDisable(true);
             messageLabel.setVisible(true);
-            messageLabel.setText("No Books to Available to Check Out");
+            removeButton.setDisable(true);
+            updateButton.setDisable(true);
+            messageLabel.setText("No Books in the Library");
         }
     }
 
@@ -167,7 +169,7 @@ public class AdminLibraryController implements Initializable {
             ResultSet results = statement.executeQuery("SELECT * FROM books"); //get available book
 
             while (results.next()) {
-                book.add(new Book(results.getInt("Redemption_code"), results.getString("Title"), results.getString("Author"), results.getInt("Pages"), results.getInt("ISBN")));
+                book.add(new Book(results.getInt("Redemption_code"), results.getString("Title"), results.getString("Author"), results.getInt("Pages"), results.getString("ISBN")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -194,7 +196,7 @@ public class AdminLibraryController implements Initializable {
         } else {
             if (Admin.updateBook((Integer.parseInt(oldRedemptionCodeInput.getText())), Integer.parseInt(newRedemptionCodeInput.getText()), titleString, authorString, Integer.parseInt(pagesnumUpdateInput.getText()), Long.parseLong(isbnUpdateInput.getText()))) {
                 messageLabel.setVisible(true);
-                messageLabel.setText("Book added successfully");
+                messageLabel.setText("Book updated successfully");
 
                 book.clear();
 
@@ -203,7 +205,7 @@ public class AdminLibraryController implements Initializable {
                     ResultSet results = statement.executeQuery("SELECT * FROM books"); //get available book
 
                     while (results.next()) {
-                        book.add(new Book(results.getInt("Redemption_code"), results.getString("Title"), results.getString("Author"), results.getInt("Pages"), results.getInt("ISBN")));
+                        book.add(new Book(results.getInt("Redemption_code"), results.getString("Title"), results.getString("Author"), results.getInt("Pages"), results.getString("ISBN")));
                     }
                 } catch (SQLException e) {
                     e.printStackTrace();
@@ -218,15 +220,10 @@ public class AdminLibraryController implements Initializable {
                 tableView.setItems(book);
 
                 tableView.getSelectionModel().selectFirst();
+            } else{
+                messageLabel.setVisible(true);
+                messageLabel.setText("Book could not be updated");
             }
-        }
-        ObservableList<Book> bookSelected;
-        bookSelected = tableView.getItems();
-
-        if (bookSelected.isEmpty()) {
-            //checkoutButton.setDisable(true);
-            messageLabel.setVisible(true);
-            messageLabel.setText("No Books to Available to Check Out");
         }
     }
 }

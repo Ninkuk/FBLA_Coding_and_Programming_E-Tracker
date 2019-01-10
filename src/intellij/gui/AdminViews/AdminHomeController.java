@@ -124,6 +124,15 @@ public class AdminHomeController implements Initializable {
             grade.setCellValueFactory(new PropertyValueFactory<>("grade"));
         }
         tableView.setItems(student);
+
+        ObservableList<Student> studentsSelected;
+        studentsSelected = tableView.getItems();
+
+        if (studentsSelected.isEmpty()) {
+            removeButton.setDisable(true);
+            messageLabel.setVisible(true);
+            messageLabel.setText("No Students to show");
+        }
     }
 
     public void removeStudent() {
@@ -158,6 +167,12 @@ public class AdminHomeController implements Initializable {
         tableView.setItems(student);
 
         tableView.getSelectionModel().selectFirst();
+
+        if (studentsSelected.isEmpty()) {
+            removeButton.setDisable(true);
+            messageLabel.setVisible(true);
+            messageLabel.setText("No Students to show");
+        }
     }
 
     public void updateStudent(){
@@ -200,5 +215,14 @@ public class AdminHomeController implements Initializable {
             }
         }
         tableView.setItems(student);
+
+        ObservableList<Student> studentsSelected;
+        studentsSelected = tableView.getItems();
+
+        if (studentsSelected.isEmpty()) {
+            removeButton.setDisable(true);
+            messageLabel.setVisible(true);
+            messageLabel.setText("No Students to show");
+        }
     }
 }

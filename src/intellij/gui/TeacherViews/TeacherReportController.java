@@ -47,6 +47,8 @@ public class TeacherReportController implements Initializable {
     }
 
     public void generateReport() {
+        report.clear();
+
         try {
             Statement statement = DBConnection.getConnection().createStatement();
             ResultSet results = statement.executeQuery("SELECT Id, Title, Held_by, Date_out, Date_in, Due_by, Redemption_code FROM weekly_reports");
@@ -58,6 +60,8 @@ public class TeacherReportController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+
 
         title.setCellValueFactory(new PropertyValueFactory<>("title"));
         heldBy.setCellValueFactory(new PropertyValueFactory<>("heldBy"));

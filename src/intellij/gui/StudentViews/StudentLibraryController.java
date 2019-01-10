@@ -47,7 +47,7 @@ public class StudentLibraryController implements Initializable {
             ResultSet results = statement.executeQuery("SELECT * FROM books WHERE Held_by IS NULL"); //get available book
 
             while (results.next()) {
-                book.add(new Book(results.getInt("Redemption_code"), results.getString("Title"), results.getString("Author"), results.getInt("Pages"), results.getLong("ISBN")));
+                book.add(new Book(results.getInt("Redemption_code"), results.getString("Title"), results.getString("Author"), results.getInt("Pages"), results.getString("ISBN")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -93,7 +93,7 @@ public class StudentLibraryController implements Initializable {
                 ResultSet results = statement.executeQuery("SELECT * FROM books WHERE Held_by IS NULL"); //get available book
 
                 while (results.next()) {
-                    book.add(new Book(results.getInt("Redemption_code"), results.getString("Title"), results.getString("Author"), results.getInt("Pages"), results.getLong("ISBN")));
+                    book.add(new Book(results.getInt("Redemption_code"), results.getString("Title"), results.getString("Author"), results.getInt("Pages"), results.getString("ISBN")));
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
