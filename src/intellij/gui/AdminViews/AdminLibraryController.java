@@ -78,7 +78,6 @@ public class AdminLibraryController implements Initializable {
 
         tableView.getSelectionModel().selectFirst();
 
-
         ObservableList<Book> bookSelected;
         bookSelected = tableView.getItems();
 
@@ -140,6 +139,8 @@ public class AdminLibraryController implements Initializable {
             }
         }
 
+        tableView.getSelectionModel().selectFirst();
+
         ObservableList<Book> bookSelected;
         bookSelected = tableView.getItems();
 
@@ -184,6 +185,15 @@ public class AdminLibraryController implements Initializable {
         tableView.setItems(book);
 
         tableView.getSelectionModel().selectFirst();
+
+        bookSelected = tableView.getItems();
+
+        if (bookSelected.isEmpty()) {
+            messageLabel.setVisible(true);
+            removeButton.setDisable(true);
+            updateButton.setDisable(true);
+            messageLabel.setText("No Books in the Library");
+        }
     }
 
     public void updateBook() {
@@ -220,6 +230,16 @@ public class AdminLibraryController implements Initializable {
                 tableView.setItems(book);
 
                 tableView.getSelectionModel().selectFirst();
+
+                ObservableList<Book> bookSelected;
+                bookSelected = tableView.getItems();
+
+                if (bookSelected.isEmpty()) {
+                    messageLabel.setVisible(true);
+                    removeButton.setDisable(true);
+                    updateButton.setDisable(true);
+                    messageLabel.setText("No Books in the Library");
+                }
             } else{
                 messageLabel.setVisible(true);
                 messageLabel.setText("Book could not be updated");

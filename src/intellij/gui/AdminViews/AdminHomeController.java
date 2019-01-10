@@ -125,6 +125,8 @@ public class AdminHomeController implements Initializable {
         }
         tableView.setItems(student);
 
+        tableView.getSelectionModel().selectFirst();
+
         ObservableList<Student> studentsSelected;
         studentsSelected = tableView.getItems();
 
@@ -215,6 +217,8 @@ public class AdminHomeController implements Initializable {
             }
         }
         tableView.setItems(student);
+
+        tableView.getSelectionModel().selectFirst();
 
         ObservableList<Student> studentsSelected;
         studentsSelected = tableView.getItems();
