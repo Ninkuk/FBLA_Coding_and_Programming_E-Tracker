@@ -23,9 +23,9 @@ public class LoginScreenController {
         String username = usernameInput.getText();
         String password = passwordInput.getText();
 
-        if ((User.logIn(username, password))) {
+        if ((User.logIn(username, password))) { //passes in the username and password values to the login function in the user class and if it returns true, the application will progress to a dashboard
             switch (User.getAccessLevel()) {
-                case "admin": {
+                case "admin": { //admin has access to add, view, edit and remove books and students
                     Parent root = FXMLLoader.load(getClass().getResource("AdminViews/AdminDashboardView.fxml"));
                     Scene scene = new Scene(root, 1000, 650);
                     Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -33,7 +33,7 @@ public class LoginScreenController {
                     window.show();
                     break;
                 }
-                case "teacher": {
+                case "teacher": { //teacher can see their students and view reports
                     Parent root = FXMLLoader.load(getClass().getResource("TeacherViews/TeacherDashboardView.fxml"));
                     Scene scene = new Scene(root, 1000, 650);
                     Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -41,7 +41,7 @@ public class LoginScreenController {
                     window.show();
                     break;
                 }
-                case "student": {
+                case "student": { //students can check out, return and renew books
                     Parent root = FXMLLoader.load(getClass().getResource("StudentViews/StudentDashboardView.fxml"));
                     Scene scene = new Scene(root, 1000, 650);
                     Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
