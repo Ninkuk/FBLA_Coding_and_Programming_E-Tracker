@@ -1,7 +1,6 @@
 package intellij.gui.StudentViews;
 
 import intellij.Book;
-import intellij.Student;
 import intellij.User;
 import intellij.database.DBConnection;
 import javafx.collections.FXCollections;
@@ -18,20 +17,26 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class StudentLibraryController implements Initializable {
 
-    @FXML TableView<Book> tableView;
-    @FXML TableColumn<Book, String> title;
-    @FXML TableColumn<Book, String> author;
-    @FXML TableColumn<Book, Integer> pagenum;
-    @FXML TableColumn<Book, Integer> isbn;
-    @FXML TableColumn<Book, Integer> redemption;
+    @FXML
+    TableView<Book> tableView;
+    @FXML
+    TableColumn<Book, String> title;
+    @FXML
+    TableColumn<Book, String> author;
+    @FXML
+    TableColumn<Book, Integer> pagenum;
+    @FXML
+    TableColumn<Book, Integer> isbn;
+    @FXML
+    TableColumn<Book, Integer> redemption;
 
     public Button checkoutButton;
-    @FXML public Label messageLabel;
+    @FXML
+    public Label messageLabel;
 
     ObservableList<Book> book = FXCollections.observableArrayList();
 
@@ -62,7 +67,7 @@ public class StudentLibraryController implements Initializable {
         ObservableList<Book> bookSelected;
         bookSelected = tableView.getItems();
 
-        if (bookSelected.isEmpty()){
+        if (bookSelected.isEmpty()) {
             checkoutButton.setDisable(true);
             messageLabel.setVisible(true);
             messageLabel.setText("No Books to Available to Check Out");
@@ -101,8 +106,7 @@ public class StudentLibraryController implements Initializable {
             redemption.setCellValueFactory(new PropertyValueFactory<>("redemptionCode"));
 
             tableView.setItems(book);
-        }
-        else {
+        } else {
             messageLabel.setVisible(true);
             messageLabel.setText("Your can't check out more than 5 books");
         }
