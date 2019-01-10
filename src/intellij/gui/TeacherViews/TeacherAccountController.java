@@ -12,9 +12,10 @@ import javafx.scene.layout.VBox;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class TeacherAccountController implements Initializable{
+public class TeacherAccountController implements Initializable {
 
-    @FXML Label nameLabel;
+    @FXML
+    Label nameLabel;
     public Button changePasswordButton;
     public Button changePasswordValidateButton;
     public VBox changePasswordBox;
@@ -30,20 +31,19 @@ public class TeacherAccountController implements Initializable{
         nameLabel.setText(firstName + " " + lastName);
     }
 
-    public void showChangePasswordBox(){
+    public void showChangePasswordBox() {
         changePasswordBox.setVisible(true);
     }
 
-    public void changePasswordValidate(){
+    public void changePasswordValidate() {
         String password1Text = password1.getText();
         String password2Text = password2.getText();
 
-        if ((password1Text.equals(password2Text))){
+        if ((password1Text.equals(password2Text))) {
             String message = Teacher.changePassword(password1Text);
             errorMessage.setVisible(true);
             errorMessage.setText(message);
-        }
-        else {
+        } else {
             errorMessage.setVisible(true);
             errorMessage.setText("Passwords Do Not Match");
         }
