@@ -1,7 +1,6 @@
 package intellij.gui.StudentViews;
 
 import intellij.Book;
-import intellij.Student;
 import intellij.User;
 import intellij.database.DBConnection;
 import javafx.collections.FXCollections;
@@ -115,7 +114,6 @@ public class StudentHomeController implements Initializable {
             messageLabel.setVisible(true);
             messageLabel.setText("You can't renew a book more than 3 times");
         }
-
         tableView.setItems(book);
     }
 
@@ -158,7 +156,6 @@ public class StudentHomeController implements Initializable {
             messageLabel.setVisible(true);
             messageLabel.setText("Error Returning Book");
         }
-
         tableView.getSelectionModel().selectFirst();
     }
 }
