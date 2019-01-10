@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+      style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="intellij.gui.LoginScreenController">
+    <children>
+        <VBox alignment="CENTER">
+            <children>
+                <Label alignment="CENTER" text="LOGIN">
+                    <font>
+                        <Font name="Montserrat ExtraBold" size="100.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets/>
+                    </VBox.margin>
+                </Label>
+            </children>
+            <HBox.margin>
+                <Insets/>
+            </HBox.margin>
+        </VBox>
+        <VBox prefWidth="100.0"/>
+        <VBox alignment="CENTER">
+            <children>
+                <HBox alignment="CENTER">
+                    <children>
+                        <VBox alignment="CENTER">
+                            <children>
+                                <JFXTextField fx:id="usernameInput" focusColor="#00bfa5" labelFloat="true"
+                                              promptText="Username" unFocusColor="#949494">
+                                    <font>
+                                        <Font name="Montserrat Medium" size="25.0"/>
+                                    </font>
+                                </JFXTextField>
+                                <JFXPasswordField fx:id="passwordInput" focusColor="#00bfa5" labelFloat="true"
+                                                  promptText="Password" unFocusColor="#949494">
+                                    <font>
+                                        <Font name="Montserrat Medium" size="25.0"/>
+                                    </font>
+                                    <VBox.margin>
+                                        <Insets top="50.0"/>
+                                    </VBox.margin>
+                                </JFXPasswordField>
+                                <Label fx:id="inputError" alignment="CENTER" text="Sorry, Wrong Username or Password"
+                                       textFill="#f44336" visible="false">
+                                    <VBox.margin>
+                                        <Insets top="15.0"/>
+                                    </VBox.margin>
+                                    <font>
+                                        <Font name="Montserrat Regular" size="10.0"/>
+                                    </font>
+                                </Label>
+                                <JFXButton fx:id="loginButton" alignment="CENTER" buttonType="RAISED"
+                                           onAction="#buttonToDashboard" ripplerFill="WHITE"
+                                           style="-fx-background-color: #00bfa5;" text="Log In" textAlignment="CENTER"
+                                           textFill="WHITE">
+                                    <font>
+                                        <Font name="Montserrat Medium" size="25.0"/>
+                                    </font>
+                                    <VBox.margin>
+                                        <Insets top="40.0"/>
+                                    </VBox.margin>
+                                </JFXButton>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</HBox>

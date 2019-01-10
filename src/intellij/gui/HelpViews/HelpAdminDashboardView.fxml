@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label text="What is this page?" />
+        <Label prefWidth="500.0" text="The home page displays all the student in the AP English class. As the admin, you have the ability to add, update, and remove students." wrapText="true">
+            <VBox.margin>
+                <Insets top="5.0" />
+            </VBox.margin>
+        </Label>
+        <Label layoutX="10.0" layoutY="10.0" text="How to add a student?">
+            <VBox.margin>
+                <Insets top="20.0" />
+            </VBox.margin>
+        </Label>
+        <Label layoutX="10.0" layoutY="32.0" prefWidth="500.0" text="Press the add button and fill out the required fields." wrapText="true">
+            <VBox.margin>
+                <Insets top="5.0" />
+            </VBox.margin>
+        </Label>
+        <Label layoutX="10.0" layoutY="86.0" text="How to update a student?">
+            <VBox.margin>
+                <Insets top="20.0" />
+            </VBox.margin>
+        </Label>
+        <Label layoutX="10.0" layoutY="108.0" prefWidth="500.0" text="Press the update button and fill out the required fields. If a nonexistent username is entered, then the update won’t happen." wrapText="true">
+            <VBox.margin>
+                <Insets top="5.0" />
+            </VBox.margin>
+        </Label>
+        <Label layoutX="10.0" layoutY="86.0" text="How can I change the username of the student?">
+            <VBox.margin>
+                <Insets top="20.0" />
+            </VBox.margin>
+        </Label>
+        <Label layoutX="10.0" layoutY="108.0" prefWidth="500.0" text="The username of students follows the convention of combining the first letter of the first name and the last name; therefore, in order to change the username, then you must change the name of the student." wrapText="true">
+            <VBox.margin>
+                <Insets top="5.0" />
+            </VBox.margin>
+        </Label><Label layoutX="10.0" layoutY="86.0" text="How to remove a student?">
+            <VBox.margin>
+                <Insets top="20.0" />
+            </VBox.margin>
+        </Label>
+        <Label layoutX="10.0" layoutY="108.0" prefWidth="500.0" text="Select a student from the table and press remove. Be careful, as this action is irreversible." wrapText="true">
+            <VBox.margin>
+                <Insets top="5.0"/>
+            </VBox.margin>
+        </Label>
+    </children>
+    <padding>
+        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+    </padding>
+</VBox>

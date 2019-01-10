@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label text="What is this page?" />
+      <Label prefWidth="500.0" text="The home page displays what books you have checked out and allows you to renew them or return them." wrapText="true">
+         <VBox.margin>
+            <Insets top="5.0" />
+         </VBox.margin>
+      </Label>
+      <Label layoutX="10.0" layoutY="10.0" text="How to renew a book?">
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
+      </Label>
+      <Label layoutX="10.0" layoutY="32.0" prefWidth="500.0" text="The home page displays Select the book you would like to renew and press renewwhat books you have checked out and allows you to renew them or return them." wrapText="true">
+         <VBox.margin>
+            <Insets top="5.0" />
+         </VBox.margin>
+      </Label>
+      <Label layoutX="10.0" layoutY="86.0" text="Is there a limit on renewals per book?">
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
+      </Label>
+      <Label layoutX="10.0" layoutY="108.0" prefWidth="500.0" text="Yes, only 3 renewals per book." wrapText="true">
+         <VBox.margin>
+            <Insets top="5.0" />
+         </VBox.margin>
+      </Label>
+      <Label layoutX="10.0" layoutY="162.0" text="By how many days does a renewal extend the deadline by?">
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
+      </Label>
+      <Label layoutX="10.0" layoutY="179.0" prefWidth="500.0" text="A renewal extends the deadline by 7 days." wrapText="true">
+         <VBox.margin>
+            <Insets top="5.0" />
+         </VBox.margin>
+      </Label>
+      <Label layoutX="10.0" layoutY="221.0" text="How to return a book?">
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
+      </Label>
+      <Label layoutX="10.0" layoutY="243.0" prefWidth="500.0" text="Select the book you would like to return and press return" wrapText="true">
+         <VBox.margin>
+            <Insets top="5.0" />
+         </VBox.margin>
+      </Label>
+   </children>
+   <padding>
+      <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+   </padding>
+</VBox>

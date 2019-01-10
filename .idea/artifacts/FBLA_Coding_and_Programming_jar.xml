@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="FBLA Coding and Programming:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/FBLA_Coding_and_Programming_jar</output-path>
+    <root id="archive" name="FBLA Coding and Programming.jar">
+      <element id="module-output" name="FBLA Coding and Programming" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/jfoenix-9.0.8.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/mysql-connector-java-8.0.13.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

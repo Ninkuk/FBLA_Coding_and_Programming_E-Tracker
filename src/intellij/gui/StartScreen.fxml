@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--import statements-->
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<!--HBox and VBox used for perfectly aligning elements to the screen-->
+<HBox alignment="CENTER" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/10.0.1"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="intellij.gui.StartScreenController">
+    <VBox alignment="CENTER">
+        <children>
+            <Label text="E-TRACKER">
+                <font>
+                    <Font name="Montserrat ExtraBold" size="100.0"/> <!--Montserrat Font by Google used-->
+                </font>
+            </Label>
+            <JFXButton fx:id="startButton" buttonType="RAISED" contentDisplay="CENTER" onAction="#buttonToLoginPage"
+                       prefHeight="55.0" prefWidth="223.0" ripplerFill="WHITE" style="-fx-background-color: #00bfa5;"
+                       text="Start" textAlignment="CENTER" textFill="WHITE">
+                <font>
+                    <Font name="Montserrat Medium" size="32.0"/>
+                </font>
+                <VBox.margin>
+                    <Insets top="40.0"/>
+                </VBox.margin>
+            </JFXButton>
+        </children>
+    </VBox>
+</HBox>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label text="What is this page?" />
+        <Label prefWidth="500.0" text="The library displays all the books in the library. As the admin, you have the ability to add, update, and remove a book." wrapText="true">
+            <VBox.margin>
+                <Insets top="5.0" />
+            </VBox.margin>
+        </Label>
+        <Label layoutX="10.0" layoutY="10.0" text="How to add a book?">
+            <VBox.margin>
+                <Insets top="20.0" />
+            </VBox.margin>
+        </Label>
+        <Label layoutX="10.0" layoutY="32.0" prefWidth="500.0" text="Press the add button and fill out the required fields. The redemption code entered must be unique, otherwise, the book won’t be added." wrapText="true">
+            <VBox.margin>
+                <Insets top="5.0" />
+            </VBox.margin>
+        </Label>
+        <Label layoutX="10.0" layoutY="86.0" text="How to update a book?">
+            <VBox.margin>
+                <Insets top="20.0" />
+            </VBox.margin>
+        </Label>
+        <Label layoutX="10.0" layoutY="108.0" prefWidth="500.0" text="Press the update button and fill out the required fields. If the new redemption code entered is not unique, then the book won’t be updated." wrapText="true">
+            <VBox.margin>
+                <Insets top="5.0" />
+            </VBox.margin>
+        </Label><Label layoutX="10.0" layoutY="86.0" text="Old redemption code vs new redemption code in update book">
+            <VBox.margin>
+                <Insets top="20.0" />
+            </VBox.margin>
+        </Label>
+        <Label layoutX="10.0" layoutY="108.0" prefWidth="500.0" text="The old redemption code is the redemption code for the book you want to update. The new redemption code is the new redemption code value you want the book to have." wrapText="true">
+            <VBox.margin>
+                <Insets top="5.0" />
+            </VBox.margin>
+        </Label><Label layoutX="10.0" layoutY="86.0" text="How to remove a book?">
+            <VBox.margin>
+                <Insets top="20.0" />
+            </VBox.margin>
+        </Label>
+        <Label layoutX="10.0" layoutY="108.0" prefWidth="500.0" text="Select a book from the table and press remove. Be careful, as this action is irreversible." wrapText="true">
+            <VBox.margin>
+                <Insets top="5.0" />
+            </VBox.margin>
+        </Label>
+    </children>
+    <padding>
+        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+    </padding>
+</VBox>

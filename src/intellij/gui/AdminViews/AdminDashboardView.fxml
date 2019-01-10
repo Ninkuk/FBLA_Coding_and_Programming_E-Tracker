@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="adminDashBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="220.0" minWidth="800.0"
+            prefHeight="650.0" prefWidth="1000.0" style="-fx-background-color: #ffffff;"
+            xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="intellij.gui.AdminViews.AdminController">
+    <left>
+        <VBox alignment="TOP_CENTER" prefWidth="150.0" style="-fx-background-color: #455A64;"
+              BorderPane.alignment="CENTER">
+            <children>
+                <VBox fx:id="accountInfo" prefHeight="200.0" prefWidth="150.0" style="-fx-background-color: #263238;">
+                    <children>
+                        <HBox alignment="CENTER" prefHeight="92.0">
+                            <VBox.margin>
+                                <Insets top="15.0"/>
+                            </VBox.margin>
+                            <children>
+                                <ImageView fitHeight="92.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../res/img/DefaultAvatar.png"/>
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER">
+                            <VBox alignment="CENTER">
+                                <Label text="Welcome back," textFill="WHITE">
+                                    <font>
+                                        <Font name="Montserrat Regular" size="15.0"/>
+                                    </font>
+                                </Label>
+                                <Label layoutX="28.0" layoutY="140.0" text="Administrator" textFill="WHITE">
+                                    <font>
+                                        <Font name="Montserrat SemiBold" size="15.0"/>
+                                    </font>
+                                </Label>
+                            </VBox>
+                            <VBox.margin>
+                                <Insets top="20.0"/>
+                            </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER" prefWidth="150.0">
+                            <children>
+                                <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER"
+                                           focusTraversable="false" ripplerFill="#00e676" text="Sign Out"
+                                           textFill="#00e676" fx:id="signOutButton" onAction="#signOutToLogin">
+                                    <font>
+                                        <Font name="Montserrat Medium" size="8.0"/>
+                                    </font>
+                                </JFXButton>
+                            </children>
+                            <VBox.margin>
+                                <Insets top="10.0"/>
+                            </VBox.margin>
+                        </HBox>
+                    </children>
+                </VBox>
+                <JFXButton fx:id="homeButton" centerShape="false" focusTraversable="false" onAction="#switchToHome"
+                           prefHeight="40.0" prefWidth="150.0" ripplerFill="BLACK"
+                           style="-fx-background-color: #37474F;" text="Home" textFill="WHITE">
+                    <graphic>
+                        <ImageView fitHeight="74.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../res/img/home.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <padding>
+                        <Insets left="-25.0"/>
+                    </padding>
+                    <font>
+                        <Font name="Montserrat Medium" size="15.0"/>
+                    </font>
+                </JFXButton>
+                <JFXButton fx:id="libraryButton" focusTraversable="false" layoutX="10.0" layoutY="210.0"
+                           onAction="#switchToLibrary" prefHeight="40.0" prefWidth="150.0" ripplerFill="BLACK"
+                           text="Library" textFill="WHITE">
+                    <graphic>
+                        <ImageView fitHeight="74.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../res/img/book.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <padding>
+                        <Insets left="-20.0"/>
+                    </padding>
+                    <font>
+                        <Font name="Montserrat Medium" size="15.0"/>
+                    </font>
+                </JFXButton>
+                <JFXButton fx:id="reportButton" focusTraversable="false" layoutX="10.0" layoutY="210.0"
+                           onAction="#switchToReport" prefHeight="40.0" prefWidth="150.0" ripplerFill="BLACK"
+                           text="Reports" textFill="WHITE">
+                    <graphic>
+                        <ImageView fitHeight="74.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../res/img/report.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <padding>
+                        <Insets left="-15.0"/>
+                    </padding>
+                    <font>
+                        <Font name="Montserrat Medium" size="15.0"/>
+                    </font>
+                </JFXButton>
+                <JFXButton fx:id="accountButton" focusTraversable="false" layoutX="10.0" layoutY="250.0"
+                           onAction="#switchToAccount" prefHeight="40.0" prefWidth="150.0" ripplerFill="BLACK"
+                           text="Account" textFill="WHITE">
+                    <graphic>
+                        <ImageView fitHeight="74.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../res/img/settings.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <padding>
+                        <Insets left="-10.0"/>
+                    </padding>
+                    <font>
+                        <Font name="Montserrat Medium" size="15.0"/>
+                    </font>
+                </JFXButton>
+                <HBox alignment="CENTER" prefWidth="150.0">
+                    <children>
+                        <JFXButton fx:id="helpButton" focusTraversable="false" onAction="#openHelp" prefHeight="25.0"
+                                   prefWidth="115.0" style="-fx-background-color: #00bfa5; -fx-border-radius: 25px;"
+                                   text="Help" textFill="WHITE">
+                            <font>
+                                <Font name="Montserrat Medium" size="15.0"/>
+                            </font>
+                        </JFXButton>
+                    </children>
+                    <VBox.margin>
+                        <Insets top="250.0"/>
+                    </VBox.margin>
+                </HBox>
+            </children>
+        </VBox>
+    </left>
+    <center/>
+</BorderPane>
