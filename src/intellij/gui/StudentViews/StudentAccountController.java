@@ -43,13 +43,19 @@ public class StudentAccountController implements Initializable {
         String password1Text = password1.getText();
         String password2Text = password2.getText();
 
-        if ((password1Text.equals(password2Text))) {
-            String message = Student.changePassword(password1Text);
+        if (password1Text.isEmpty() || password2Text.isEmpty()){
             errorMessage.setVisible(true);
-            errorMessage.setText(message);
-        } else {
-            errorMessage.setVisible(true);
-            errorMessage.setText("Passwords Do Not Match");
+            errorMessage.setText("Please enter both fields");
+        }
+        else {
+            if ((password1Text.equals(password2Text))) {
+                String message = Student.changePassword(password1Text);
+                errorMessage.setVisible(true);
+                errorMessage.setText(message);
+            } else {
+                errorMessage.setVisible(true);
+                errorMessage.setText("Passwords Do Not Match");
+            }
         }
     }
 }
