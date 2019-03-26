@@ -9,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
@@ -53,7 +52,7 @@ public class AdminLibraryController implements Initializable {
     public VBox addInfoFields;
     public VBox updateInfoFields;
 
-    ObservableList<Book> book = FXCollections.observableArrayList();
+    private ObservableList<Book> book = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -92,18 +91,31 @@ public class AdminLibraryController implements Initializable {
     public void displayAddFields() {
         addInfoFields.setVisible(true);
         updateInfoFields.setVisible(false);
+
+        redemptionCodeInput.clear();
+        titleInput.clear();
+        authorInput.clear();
+        pagesnumInput.clear();
+        isbnInput.clear();
     }
 
     public void displayUpdateFields() {
         addInfoFields.setVisible(false);
         updateInfoFields.setVisible(true);
+
+        oldRedemptionCodeInput.clear();
+        newRedemptionCodeInput.clear();
+        titleUpdateInput.clear();
+        authorUpdateInput.clear();
+        pagesnumUpdateInput.clear();
+        isbnUpdateInput.clear();
     }
 
     public void addBook() {
         String titleString = titleInput.getText();
         String authorString = authorInput.getText();
 
-        if ((redemptionCodeInput.getText().isEmpty()) && titleString.isEmpty() && authorString.isEmpty() && (pagesnumInput.getText().isEmpty()) && (isbnInput.getText().isEmpty())) {
+        if ((redemptionCodeInput.getText().isEmpty()) || titleString.isEmpty() || authorString.isEmpty() || (pagesnumInput.getText().isEmpty()) || (isbnInput.getText().isEmpty())) {
             messageLabel.setVisible(true);
             messageLabel.setText("Enter all the values before adding books");
         } else {
@@ -152,6 +164,57 @@ public class AdminLibraryController implements Initializable {
         }
     }
 
+    public void updateBook() {
+        String titleString = titleUpdateInput.getText();
+        String authorString = authorUpdateInput.getText();
+
+        if ((oldRedemptionCodeInput.getText().isEmpty()) || (newRedemptionCodeInput.getText().isEmpty()) || titleString.isEmpty() || authorString.isEmpty() || (pagesnumUpdateInput.getText().isEmpty()) || (isbnUpdateInput.getText().isEmpty())) {
+            messageLabel.setVisible(true);
+            messageLabel.setText("Enter all the values before updating books");
+        } else {
+            if (Admin.updateBook((Integer.parseInt(oldRedemptionCodeInput.getText())), Integer.parseInt(newRedemptionCodeInput.getText()), titleString, authorString, Integer.parseInt(pagesnumUpdateInput.getText()), Long.parseLong(isbnUpdateInput.getText()))) {
+                messageLabel.setVisible(true);
+                messageLabel.setText("Book updated successfully");
+
+                book.clear();
+
+                try {
+                    Statement statement = DBConnection.getConnection().createStatement();
+                    ResultSet results = statement.executeQuery("SELECT * FROM books"); //get available book
+
+                    while (results.next()) {
+                        book.add(new Book(results.getInt("Redemption_code"), results.getString("Title"), results.getString("Author"), results.getInt("Pages"), results.getString("ISBN")));
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+                title.setCellValueFactory(new PropertyValueFactory<>("title"));
+                author.setCellValueFactory(new PropertyValueFactory<>("author"));
+                pagenum.setCellValueFactory(new PropertyValueFactory<>("pages"));
+                isbn.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
+                redemption.setCellValueFactory(new PropertyValueFactory<>("redemptionCode"));
+
+                tableView.setItems(book);
+
+                tableView.getSelectionModel().selectFirst();
+
+                ObservableList<Book> bookSelected;
+                bookSelected = tableView.getItems();
+
+                if (bookSelected.isEmpty()) {
+                    messageLabel.setVisible(true);
+                    removeButton.setDisable(true);
+                    updateButton.setDisable(true);
+                    messageLabel.setText("No Books in the Library");
+                }
+            } else {
+                messageLabel.setVisible(true);
+                messageLabel.setText("Book could not be updated");
+            }
+        }
+    }
+
     public void removeBook() {
         ObservableList<Book> bookSelected;
         bookSelected = tableView.getSelectionModel().getSelectedItems();
@@ -194,56 +257,17 @@ public class AdminLibraryController implements Initializable {
             updateButton.setDisable(true);
             messageLabel.setText("No Books in the Library");
         }
-    }
 
-    public void updateBook() {
-        String titleString = titleUpdateInput.getText();
-        String authorString = authorUpdateInput.getText();
-
-        if ((oldRedemptionCodeInput.getText().isEmpty()) && (newRedemptionCodeInput.getText().isEmpty()) && titleString.isEmpty() && authorString.isEmpty() && (pagesnumUpdateInput.getText().isEmpty()) && (isbnUpdateInput.getText().isEmpty())) {
-            messageLabel.setVisible(true);
-            messageLabel.setText("Enter all the values before updating books");
-        } else {
-            if (Admin.updateBook((Integer.parseInt(oldRedemptionCodeInput.getText())), Integer.parseInt(newRedemptionCodeInput.getText()), titleString, authorString, Integer.parseInt(pagesnumUpdateInput.getText()), Long.parseLong(isbnUpdateInput.getText()))) {
-                messageLabel.setVisible(true);
-                messageLabel.setText("Book updated successfully");
-
-                book.clear();
-
-                try {
-                    Statement statement = DBConnection.getConnection().createStatement();
-                    ResultSet results = statement.executeQuery("SELECT * FROM books"); //get available book
-
-                    while (results.next()) {
-                        book.add(new Book(results.getInt("Redemption_code"), results.getString("Title"), results.getString("Author"), results.getInt("Pages"), results.getString("ISBN")));
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-
-                title.setCellValueFactory(new PropertyValueFactory<>("title"));
-                author.setCellValueFactory(new PropertyValueFactory<>("author"));
-                pagenum.setCellValueFactory(new PropertyValueFactory<>("pages"));
-                isbn.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
-                redemption.setCellValueFactory(new PropertyValueFactory<>("redemptionCode"));
-
-                tableView.setItems(book);
-
-                tableView.getSelectionModel().selectFirst();
-
-                ObservableList<Book> bookSelected;
-                bookSelected = tableView.getItems();
-
-                if (bookSelected.isEmpty()) {
-                    messageLabel.setVisible(true);
-                    removeButton.setDisable(true);
-                    updateButton.setDisable(true);
-                    messageLabel.setText("No Books in the Library");
-                }
-            } else{
-                messageLabel.setVisible(true);
-                messageLabel.setText("Book could not be updated");
-            }
-        }
+        redemptionCodeInput.clear();
+        titleInput.clear();
+        authorInput.clear();
+        pagesnumInput.clear();
+        isbnInput.clear();
+        oldRedemptionCodeInput.clear();
+        newRedemptionCodeInput.clear();
+        titleUpdateInput.clear();
+        authorUpdateInput.clear();
+        pagesnumUpdateInput.clear();
+        isbnUpdateInput.clear();
     }
 }

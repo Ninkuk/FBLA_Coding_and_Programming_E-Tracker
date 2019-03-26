@@ -80,125 +80,148 @@
                         <Insets top="20.0"/>
                     </VBox.margin>
                 </HBox>
-                <HBox fx:id="addInfoFields" alignment="TOP_CENTER" visible="false">
+                <VBox fx:id="addInfoFields" alignment="CENTER" visible="false">
                     <children>
-                        <JFXTextField fx:id="firstNameInput" focusColor="#00bfa5" labelFloat="true"
-                                      promptText="First Name" unFocusColor="#949494">
-                            <font>
-                                <Font name="Montserrat Regular" size="12.0"/>
-                            </font>
-                        </JFXTextField>
-                        <JFXTextField fx:id="lastNameInput" focusColor="#00bfa5" labelFloat="true" layoutX="30.0"
-                                      layoutY="10.0" promptText="Last Name" unFocusColor="#949494">
-                            <font>
-                                <Font name="Montserrat Regular" size="12.0"/>
-                            </font>
-                            <HBox.margin>
-                                <Insets left="20.0"/>
-                            </HBox.margin>
-                        </JFXTextField>
-                        <JFXTextField fx:id="passwordInput" focusColor="#00bfa5" labelFloat="true" layoutX="174.0"
-                                      layoutY="10.0" promptText="Password" unFocusColor="#949494">
-                            <font>
-                                <Font name="Montserrat Regular" size="12.0"/>
-                            </font>
-                            <HBox.margin>
-                                <Insets left="20.0"/>
-                            </HBox.margin>
-                        </JFXTextField>
-                        <JFXTextField fx:id="gradeInput" focusColor="#00bfa5" labelFloat="true" layoutX="318.0"
-                                      layoutY="10.0" promptText="Grade" unFocusColor="#949494">
-                            <font>
-                                <Font name="Montserrat Regular" size="12.0"/>
-                            </font>
-                            <HBox.margin>
-                                <Insets left="20.0"/>
-                            </HBox.margin>
-                        </JFXTextField>
-                        <VBox>
-                            <HBox.margin>
-                                <Insets left="20.0"/>
-                            </HBox.margin>
-                        </VBox>
+                        <HBox alignment="TOP_CENTER">
+                            <children>
+                                <JFXTextField fx:id="firstNameInput" focusColor="#00bfa5" labelFloat="true"
+                                              promptText="First Name" unFocusColor="#949494">
+                                    <font>
+                                        <Font name="Montserrat Regular" size="12.0"/>
+                                    </font>
+                                </JFXTextField>
+                                <JFXTextField fx:id="lastNameInput" focusColor="#00bfa5" labelFloat="true"
+                                              layoutX="30.0" layoutY="10.0" promptText="Last Name"
+                                              unFocusColor="#949494">
+                                    <font>
+                                        <Font name="Montserrat Regular" size="12.0"/>
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="20.0"/>
+                                    </HBox.margin>
+                                </JFXTextField>
+                                <JFXTextField fx:id="passwordInput" focusColor="#00bfa5" labelFloat="true"
+                                              layoutX="174.0" layoutY="10.0" promptText="Password"
+                                              unFocusColor="#949494">
+                                    <font>
+                                        <Font name="Montserrat Regular" size="12.0"/>
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="20.0"/>
+                                    </HBox.margin>
+                                </JFXTextField>
+                                <JFXTextField fx:id="gradeInput" focusColor="#00bfa5" labelFloat="true" layoutX="318.0"
+                                              layoutY="10.0" promptText="Grade" unFocusColor="#949494">
+                                    <font>
+                                        <Font name="Montserrat Regular" size="12.0"/>
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="20.0"/>
+                                    </HBox.margin>
+                                </JFXTextField>
+                                <VBox>
+                                    <HBox.margin>
+                                        <Insets left="20.0"/>
+                                    </HBox.margin>
+                                </VBox>
+                            </children>
+                            <VBox.margin>
+                                <Insets/>
+                            </VBox.margin>
+                        </HBox>
                         <JFXButton fx:id="addButton" buttonType="RAISED" contentDisplay="CENTER"
                                    focusTraversable="false" onAction="#addStudent" prefWidth="100.0"
                                    style="-fx-background-color: #00bfa5;" text="Add" textFill="WHITE">
                             <font>
                                 <Font name="Montserrat Medium" size="15.0"/>
                             </font>
+                            <VBox.margin>
+                                <Insets top="10.0"/>
+                            </VBox.margin>
                         </JFXButton>
                     </children>
                     <VBox.margin>
-                        <Insets top="15.0"/>
+                        <Insets top="10.0"/>
                     </VBox.margin>
-                </HBox>
-                <HBox fx:id="updateInfoFields" alignment="TOP_CENTER" layoutX="10.0" layoutY="507.0" visible="false">
+                </VBox>
+                <VBox fx:id="updateInfoFields" alignment="CENTER" visible="false">
                     <children>
-                        <JFXTextField fx:id="usernameUpdateInput" focusColor="#00bfa5" labelFloat="true" layoutX="100.0"
-                                      layoutY="10.0" promptText="Username" unFocusColor="#949494">
-                            <font>
-                                <Font name="Montserrat Regular" size="12.0"/>
-                            </font>
-                            <HBox.margin>
-                                <Insets left="20.0"/>
-                            </HBox.margin>
-                        </JFXTextField>
-                        <JFXTextField fx:id="firstNameUpdateInput" focusColor="#00bfa5" labelFloat="true"
-                                      promptText="New First Name" unFocusColor="#949494">
-                            <font>
-                                <Font name="Montserrat Regular" size="12.0"/>
-                            </font>
-                            <HBox.margin>
-                                <Insets left="20.0"/>
-                            </HBox.margin>
-                        </JFXTextField>
-                        <JFXTextField fx:id="lastNameUpdateInput" focusColor="#00bfa5" labelFloat="true" layoutX="30.0"
-                                      layoutY="10.0" promptText="New Last Name" unFocusColor="#949494">
-                            <font>
-                                <Font name="Montserrat Regular" size="12.0"/>
-                            </font>
-                            <HBox.margin>
-                                <Insets left="20.0"/>
-                            </HBox.margin>
-                        </JFXTextField>
-                        <JFXTextField fx:id="passwordUpdateInput" focusColor="#00bfa5" labelFloat="true" layoutX="174.0"
-                                      layoutY="10.0" promptText="New Password" unFocusColor="#949494">
-                            <font>
-                                <Font name="Montserrat Regular" size="12.0"/>
-                            </font>
-                            <HBox.margin>
-                                <Insets left="20.0"/>
-                            </HBox.margin>
-                        </JFXTextField>
-                        <JFXTextField fx:id="gradeUpdateInput" focusColor="#00bfa5" labelFloat="true" layoutX="318.0"
-                                      layoutY="10.0" promptText="New Grade" unFocusColor="#949494">
-                            <font>
-                                <Font name="Montserrat Regular" size="12.0"/>
-                            </font>
-                            <HBox.margin>
-                                <Insets left="20.0"/>
-                            </HBox.margin>
-                        </JFXTextField>
-                        <VBox>
-                            <HBox.margin>
-                                <Insets left="20.0"/>
-                            </HBox.margin>
-                        </VBox>
+                        <HBox alignment="TOP_CENTER">
+                            <children>
+                                <JFXTextField fx:id="usernameUpdateInput" focusColor="#00bfa5" labelFloat="true"
+                                              layoutX="100.0" layoutY="10.0" promptText="Username"
+                                              unFocusColor="#949494">
+                                    <font>
+                                        <Font name="Montserrat Regular" size="12.0"/>
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="20.0"/>
+                                    </HBox.margin>
+                                </JFXTextField>
+                                <JFXTextField fx:id="firstNameUpdateInput" focusColor="#00bfa5" labelFloat="true"
+                                              promptText="New First Name" unFocusColor="#949494">
+                                    <font>
+                                        <Font name="Montserrat Regular" size="12.0"/>
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="20.0"/>
+                                    </HBox.margin>
+                                </JFXTextField>
+                                <JFXTextField fx:id="lastNameUpdateInput" focusColor="#00bfa5" labelFloat="true"
+                                              layoutX="30.0" layoutY="10.0" promptText="New Last Name"
+                                              unFocusColor="#949494">
+                                    <font>
+                                        <Font name="Montserrat Regular" size="12.0"/>
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="20.0"/>
+                                    </HBox.margin>
+                                </JFXTextField>
+                                <JFXTextField fx:id="passwordUpdateInput" focusColor="#00bfa5" labelFloat="true"
+                                              layoutX="174.0" layoutY="10.0" promptText="New Password"
+                                              unFocusColor="#949494">
+                                    <font>
+                                        <Font name="Montserrat Regular" size="12.0"/>
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="20.0"/>
+                                    </HBox.margin>
+                                </JFXTextField>
+                                <JFXTextField fx:id="gradeUpdateInput" focusColor="#00bfa5" labelFloat="true"
+                                              layoutX="318.0" layoutY="10.0" promptText="New Grade"
+                                              unFocusColor="#949494">
+                                    <font>
+                                        <Font name="Montserrat Regular" size="12.0"/>
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="20.0"/>
+                                    </HBox.margin>
+                                </JFXTextField>
+                                <VBox>
+                                    <HBox.margin>
+                                        <Insets left="20.0"/>
+                                    </HBox.margin>
+                                </VBox>
+                            </children>
+                            <VBox.margin>
+                                <Insets/>
+                            </VBox.margin>
+                        </HBox>
                         <JFXButton fx:id="updateButton" buttonType="RAISED" contentDisplay="CENTER"
                                    focusTraversable="false" onAction="#updateStudent" prefWidth="100.0"
                                    style="-fx-background-color: #FFC107;" text="Update" textFill="WHITE">
                             <font>
                                 <Font name="Montserrat Medium" size="15.0"/>
                             </font>
-                            <HBox.margin>
-                                <Insets right="20.0"/>
-                            </HBox.margin>
+                            <VBox.margin>
+                                <Insets top="10.0"/>
+                            </VBox.margin>
                         </JFXButton>
                     </children>
                     <VBox.margin>
-                        <Insets top="-29.0"/>
+                        <Insets top="-62.0"/>
                     </VBox.margin>
-                </HBox>
+                </VBox>
                 <HBox alignment="CENTER">
                     <children>
                         <Label fx:id="messageLabel" alignment="CENTER" text="error" textFill="#f44336" visible="false">

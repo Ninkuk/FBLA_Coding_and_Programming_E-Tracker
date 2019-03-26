@@ -9,7 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.sql.ResultSet;
@@ -45,10 +45,10 @@ public class AdminHomeController implements Initializable {
     public TextField usernameUpdateInput;
     public TextField gradeUpdateInput;
     public Label messageLabel;
-    public HBox addInfoFields;
-    public HBox updateInfoFields;
+    public VBox addInfoFields;
+    public VBox updateInfoFields;
 
-    ObservableList<Student> student = FXCollections.observableArrayList();
+    private ObservableList<Student> student = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -85,11 +85,22 @@ public class AdminHomeController implements Initializable {
     public void displayAddFields(){
         addInfoFields.setVisible(true);
         updateInfoFields.setVisible(false);
+
+        firstNameInput.clear();
+        lastNameInput.clear();
+        passwordInput.clear();
+        gradeInput.clear();
     }
 
     public void displayUpdateFields(){
         addInfoFields.setVisible(false);
         updateInfoFields.setVisible(true);
+
+        usernameUpdateInput.clear();
+        firstNameUpdateInput.clear();
+        lastNameUpdateInput.clear();
+        passwordUpdateInput.clear();
+        gradeUpdateInput.clear();
     }
 
     public void addStudent() {
@@ -97,7 +108,7 @@ public class AdminHomeController implements Initializable {
         String lastNameString = lastNameInput.getText();
         String passwordString = passwordInput.getText();
 
-        if (firstNameString.isEmpty() && lastNameString.isEmpty() && passwordString.isEmpty() && (gradeInput.getText().isEmpty())) {
+        if (firstNameString.isEmpty() || lastNameString.isEmpty() || passwordString.isEmpty() || (gradeInput.getText().isEmpty())) {
             messageLabel.setVisible(true);
             messageLabel.setText("Enter all the values before adding students");
         } else {
@@ -122,6 +133,68 @@ public class AdminHomeController implements Initializable {
             lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
             username.setCellValueFactory(new PropertyValueFactory<>("username"));
             grade.setCellValueFactory(new PropertyValueFactory<>("grade"));
+
+            firstNameInput.clear();
+            lastNameInput.clear();
+            passwordInput.clear();
+            gradeInput.clear();
+        }
+        tableView.setItems(student);
+
+        tableView.getSelectionModel().selectFirst();
+
+        ObservableList<Student> studentsSelected;
+        studentsSelected = tableView.getItems();
+
+        if (studentsSelected.isEmpty()) {
+            removeButton.setDisable(true);
+            messageLabel.setVisible(true);
+            messageLabel.setText("No Students to show");
+        }
+    }
+
+    public void updateStudent(){
+        String usernameString = usernameUpdateInput.getText();
+        String firstNameString = firstNameUpdateInput.getText();
+        String lastNameString = lastNameUpdateInput.getText();
+        String passwordString =  passwordUpdateInput.getText();
+
+        if (usernameString.isEmpty() || firstNameString.isEmpty() || lastNameString.isEmpty() || passwordString.isEmpty() || (gradeUpdateInput.getText().isEmpty())) {
+            messageLabel.setVisible(true);
+            messageLabel.setText("Enter all the values before updating students");
+        } else {
+            if (Admin.updateStudent(usernameString, firstNameString, lastNameString, passwordString, (Byte.parseByte(gradeUpdateInput.getText())))) {
+                messageLabel.setVisible(true);
+                messageLabel.setText("Student information has been updated");
+
+                student.clear();
+
+                try {
+                    Statement statement = DBConnection.getConnection().createStatement();
+                    ResultSet results = statement.executeQuery("SELECT Username, First_name, Last_name, Grade FROM students");
+
+                    while (results.next()) {
+                        student.add(new Student(results.getString("First_name"), results.getString("Last_name"), results.getString("Username"), results.getByte("Grade")));
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+                firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+                lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+                username.setCellValueFactory(new PropertyValueFactory<>("username"));
+                grade.setCellValueFactory(new PropertyValueFactory<>("grade"));
+
+                usernameUpdateInput.clear();
+                firstNameUpdateInput.clear();
+                lastNameUpdateInput.clear();
+                passwordUpdateInput.clear();
+                gradeUpdateInput.clear();
+            }
+            else {
+                messageLabel.setVisible(true);
+                messageLabel.setText("Student could not be updated");
+            }
         }
         tableView.setItems(student);
 
@@ -175,58 +248,15 @@ public class AdminHomeController implements Initializable {
             messageLabel.setVisible(true);
             messageLabel.setText("No Students to show");
         }
-    }
 
-    public void updateStudent(){
-        String usernameString = usernameUpdateInput.getText();
-        String firstNameString = firstNameUpdateInput.getText();
-        String lastNameString = lastNameUpdateInput.getText();
-        String passwordString =  passwordUpdateInput.getText();
-
-        student.clear();
-
-        if (usernameString.isEmpty() && firstNameString.isEmpty() && lastNameString.isEmpty() && passwordString.isEmpty() && (gradeUpdateInput.getText().isEmpty())) {
-            messageLabel.setVisible(true);
-            messageLabel.setText("Enter all the values before updating students");
-        } else {
-            if (Admin.updateStudent(usernameString, firstNameString, lastNameString, passwordString, (Byte.parseByte(gradeUpdateInput.getText())))) {
-                messageLabel.setVisible(true);
-                messageLabel.setText("Student information has been updated");
-
-                student.clear();
-
-                try {
-                    Statement statement = DBConnection.getConnection().createStatement();
-                    ResultSet results = statement.executeQuery("SELECT Username, First_name, Last_name, Grade FROM students");
-
-                    while (results.next()) {
-                        student.add(new Student(results.getString("First_name"), results.getString("Last_name"), results.getString("Username"), results.getByte("Grade")));
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-
-                firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
-                lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-                username.setCellValueFactory(new PropertyValueFactory<>("username"));
-                grade.setCellValueFactory(new PropertyValueFactory<>("grade"));
-            }
-            else {
-                messageLabel.setVisible(true);
-                messageLabel.setText("Student could not be updated");
-            }
-        }
-        tableView.setItems(student);
-
-        tableView.getSelectionModel().selectFirst();
-
-        ObservableList<Student> studentsSelected;
-        studentsSelected = tableView.getItems();
-
-        if (studentsSelected.isEmpty()) {
-            removeButton.setDisable(true);
-            messageLabel.setVisible(true);
-            messageLabel.setText("No Students to show");
-        }
+        firstNameInput.clear();
+        lastNameInput.clear();
+        passwordInput.clear();
+        gradeInput.clear();
+        usernameUpdateInput.clear();
+        firstNameUpdateInput.clear();
+        lastNameUpdateInput.clear();
+        passwordUpdateInput.clear();
+        gradeUpdateInput.clear();
     }
 }

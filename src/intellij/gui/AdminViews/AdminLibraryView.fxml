@@ -79,6 +79,9 @@
                                     <font>
                                         <Font name="Montserrat Regular" size="12.0" />
                                     </font>
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
                                 </JFXTextField>
                                 <JFXTextField fx:id="titleInput" focusColor="#00bfa5" labelFloat="true" promptText="Title" unFocusColor="#949494">
                                     <font>
@@ -109,7 +112,7 @@
                                         <Font name="Montserrat Regular" size="12.0" />
                                     </font>
                                     <HBox.margin>
-                                        <Insets left="20.0" />
+                                        <Insets left="20.0" right="20.0" />
                                     </HBox.margin>
                                 </JFXTextField>
                             </children>
@@ -127,10 +130,10 @@
                         <Insets top="10.0" />
                     </VBox.margin>
                 </VBox>
-                <VBox fx:id="updateInfoFields" alignment="CENTER" layoutX="10.0" layoutY="507.0" visible="false">
+                <VBox fx:id="updateInfoFields" alignment="CENTER" visible="false">
                     <HBox>
                         <children>
-                            <JFXTextField fx:id="oldRedemptionCodeInput" focusColor="#00bfa5" labelFloat="true" layoutX="100.0" layoutY="10.0" promptText="Old Redemption Code" unFocusColor="#949494">
+                            <JFXTextField fx:id="oldRedemptionCodeInput" focusColor="#00bfa5" labelFloat="true" promptText="Old Redemption Code" unFocusColor="#949494">
                                 <font>
                                     <Font name="Montserrat Regular" size="12.0" />
                                 </font>
@@ -138,7 +141,7 @@
                                     <Insets left="20.0" />
                                 </HBox.margin>
                             </JFXTextField>
-                            <JFXTextField fx:id="newRedemptionCodeInput" focusColor="#00bfa5" labelFloat="true" layoutX="30.0" layoutY="10.0" promptText="New Redemption Code" unFocusColor="#949494">
+                            <JFXTextField fx:id="newRedemptionCodeInput" focusColor="#00bfa5" labelFloat="true" promptText="New Redemption Code" unFocusColor="#949494">
                                 <font>
                                     <Font name="Montserrat Regular" size="12.0" />
                                 </font>
@@ -154,7 +157,7 @@
                                     <Insets left="20.0" />
                                 </HBox.margin>
                             </JFXTextField>
-                            <JFXTextField fx:id="authorUpdateInput" focusColor="#00bfa5" labelFloat="true" layoutX="30.0" layoutY="10.0" promptText="New Author" unFocusColor="#949494">
+                            <JFXTextField fx:id="authorUpdateInput" focusColor="#00bfa5" labelFloat="true" promptText="New Author" unFocusColor="#949494">
                                 <font>
                                     <Font name="Montserrat Regular" size="12.0" />
                                 </font>
@@ -162,7 +165,7 @@
                                     <Insets left="20.0" />
                                 </HBox.margin>
                             </JFXTextField>
-                            <JFXTextField fx:id="pagesnumUpdateInput" focusColor="#00bfa5" labelFloat="true" layoutX="174.0" layoutY="10.0" promptText="New # of Pages" unFocusColor="#949494">
+                            <JFXTextField fx:id="pagesnumUpdateInput" focusColor="#00bfa5" labelFloat="true" promptText="New # of Pages" unFocusColor="#949494">
                                 <font>
                                     <Font name="Montserrat Regular" size="12.0" />
                                 </font>
@@ -170,7 +173,7 @@
                                     <Insets left="20.0" />
                                 </HBox.margin>
                             </JFXTextField>
-                            <JFXTextField fx:id="isbnUpdateInput" focusColor="#00bfa5" labelFloat="true" layoutX="318.0" layoutY="10.0" promptText="New ISBN" unFocusColor="#949494">
+                            <JFXTextField fx:id="isbnUpdateInput" focusColor="#00bfa5" labelFloat="true" promptText="New ISBN" unFocusColor="#949494">
                                 <font>
                                     <Font name="Montserrat Regular" size="12.0" />
                                 </font>

@@ -27,7 +27,7 @@
                             <children>
                                 <ImageView fitHeight="92.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../res/img/DefaultAvatar.png"/>
+                                        <Image url="@../res/img/e-tracker_logo_340x340.png"/>
                                     </image>
                                 </ImageView>
                             </children>
