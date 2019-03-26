@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -20,13 +21,15 @@ public class TeacherController implements Initializable {
 
     @FXML
     BorderPane teacherDashBorderPane;
+    public Label teacherUsername;
     public Button signOutButton;
     public Button homeButton;
     public Button reportButton;
     public Button accountButton;
     public Button helpButton;
 
-    public int viewState = 1;
+    private int viewState = 1;
+    public static String username = "Teacher";
 
     public void switchToHome() throws Exception {
         homeButton.setStyle("-fx-background-color: #37474F");
@@ -93,10 +96,12 @@ public class TeacherController implements Initializable {
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(scene);
         window.show();
+        username = "Teacher";
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         homeButton.fire();
+        teacherUsername.setText(username);
     }
 }

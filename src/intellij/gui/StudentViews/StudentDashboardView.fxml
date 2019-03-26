@@ -39,7 +39,7 @@
                                         <Font name="Montserrat Regular" size="15.0"/>
                                     </font>
                                 </Label>
-                                <Label layoutX="28.0" layoutY="140.0" text="Student" textFill="WHITE">
+                                <Label layoutX="28.0" layoutY="140.0" text="Student" textFill="WHITE" fx:id="studentUsername">
                                     <font>
                                         <Font name="Montserrat SemiBold" size="15.0"/>
                                     </font>

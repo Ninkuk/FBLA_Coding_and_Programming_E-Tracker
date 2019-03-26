@@ -70,7 +70,7 @@ public class StudentHomeController implements Initializable {
             renewButton.setDisable(true);
             returnButton.setDisable(true);
             messageLabel.setVisible(true);
-            messageLabel.setText("No Books Checked Out");
+            messageLabel.setText("No books checked out, Please go the library to check out books");
         }
     }
 
